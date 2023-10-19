@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/form.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    <div class="wrapper">
+    
+        <div class="registration_form">
+          <div>
+              <h1 align="center">Chat Application using AES</h1>
+          </div><br><br>
+                <div class="title">
+                    Chat page for {{ username }} 
+            </div>
+  
+            <form method="post">
+              <div class="form_wrap">
+                    <div class="input_wrap">
+                        <label for="city">Enter a message</label>
+                        <input type="text" id="message" name="message">
+                    </div>
+                   <button class="submit_btn">Send</button>
+  
+                </div>
+
+    {% for message in chat_messages %}
+    <p>{{ message.timestamp }} {{ message.from }}: {{ message.message}}</p>
+    {% endfor %}
+
+    <script>
+        let textbox = document.getElementById("message");
+
+        let timer = setTimeout(function() {
+            location.reload();
+        }, 5000);
+        // Every 5 seconds, messages will get refreshed 
+
+        textbox.onkeydown = function(e) { // Once key pressed, then function starts & timer stops
+            clearTimeout(timer)
+
+            timer = setTimeout(function() {
+                location.reload(); // reload starts whole process again
+            }, 5000) // User get 5 seconds between key presses to continue writing their message
+        };
+    </script>
+
+</body>
+
+</html>
